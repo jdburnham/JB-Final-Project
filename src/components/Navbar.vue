@@ -28,13 +28,13 @@
       </button>
       <router-link
         v-if="user"
-        class="p-2 mx-1 hover:text-orange-600 hover:bg-gray-800"
+        class="p-2 mx-1 hover:text-red-800 hover:bg-blue-300"
         to="/portfolio"
         >Portfolio</router-link
       >
       <router-link
         v-if="user"
-        class="p-2 mx-1 hover:text-orange-600 hover:bg-gray-800"
+        class="p-2 mx-1 hover:text-red-800 hover:bg-blue-300"
         to="/creator"
         >Creator</router-link
       >
@@ -48,7 +48,25 @@
 </template>
 
 <script>
-export default {}
+export default {
+  name: 'Navbar',
+  computed: {
+    user() {
+      return this.$store.getters.getUser
+    }
+  },
+  methods: {
+    logout() {
+      this.$firebase.auth().signOut()
+      this.$store.dispatch('setUser', '')
+      this.$router.push('/')
+    }
+  }
+}
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+:not(.logo).router-link-exact-active {
+  @apply font-bold text-orange-600 bg-white;
+}
+</style>
