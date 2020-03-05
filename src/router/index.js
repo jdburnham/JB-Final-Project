@@ -4,7 +4,6 @@ import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 import Feedback from '../views/Feedback.vue'
 import Portfolio from '../views/UserPortfolio.vue'
-import Creator from '../views/Creator.vue'
 import store from '../store'
 
 Vue.use(VueRouter)
@@ -28,14 +27,8 @@ const routes = [
   {
     path: '/portfolio',
     name: 'portfolio',
-    component: Portfolio,
-    meta: { requiresAuth: true }
-  },
-  {
-    path: '/creator',
-    name: 'Creator',
-    component: Creator,
-    meta: { requiresAuth: true }
+    component: Portfolio
+    //meta: { requiresAuth: true }
   }
 ]
 
