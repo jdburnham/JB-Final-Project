@@ -12,30 +12,15 @@
       <span class="text-gray-700">Adventurer Gender</span>
       <div class="mt-2">
         <label class="inline-flex items-center">
-          <input
-            v-model="advGender"
-            type="radio"
-            class="form-radio"
-            value="male"
-          />
+          <input v-model="advGender" type="radio" class="form-radio" value="male" />
           <span class="ml-2">Male</span>
         </label>
         <label class="inline-flex items-center ml-6">
-          <input
-            v-model="advGender"
-            type="radio"
-            class="form-radio"
-            value="female"
-          />
+          <input v-model="advGender" type="radio" class="form-radio" value="female" />
           <span class="ml-2">Female</span>
         </label>
         <label class="inline-flex items-center ml-6">
-          <input
-            v-model="advGender"
-            type="radio"
-            class="form-radio"
-            value="other"
-          />
+          <input v-model="advGender" type="radio" class="form-radio" value="other" />
           <span class="ml-2">Other</span>
         </label>
       </div>
@@ -87,23 +72,17 @@
       <button
         class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mt-4 mr-4 flex-grow"
         @click="$router.push('/portfolio')"
-      >
-        Cancel
-      </button>
+      >Cancel</button>
       <button
         v-if="!edit"
         class="bg-blue-700 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded mt-4 flex-grow"
         @click="add"
-      >
-        Add
-      </button>
+      >Add</button>
       <button
         v-else
         class="bg-green-700 hover:bg-green-900 text-white font-bold py-2 px-4 rounded mt-4 flex-grow"
         @click="save"
-      >
-        Edit
-      </button>
+      >Edit</button>
     </div>
   </div>
 </template>
@@ -112,64 +91,64 @@
 import short from 'short-uuid'
 export default {
   name: 'CharacterSheet',
-  props: {
-    edit: {
-      type: Boolean,
-      default: false
-    },
-    character: {
-      type: Object,
-      default: () => ({
-        id: '',
-        advName: '',
-        advGender: '',
-        advRace: '',
-        advClass: ''
+  // props: {
+  //   edit: {
+  //     type: Boolean,
+  //     default: false
+  //   },
+  //   character: {
+  //     type: Object,
+  //     default: () => ({
+  //       id: '',
+  //       advName: '',
+  //       advGender: '',
+  //       advRace: '',
+  //       advClass: ''
+  //     })
+  //   },
+  data() {
+    return {
+      advName: '',
+      advGender: '',
+      advRace: '',
+      advClass: ''
+    }
+  },
+  created() {
+    this.assignValues
+  },
+  methods: {
+    add() {
+      this.$store.dispatch('addCharacter', {
+        id: short.generate(),
+        advName: this.advName,
+        advGender: this.advGender,
+        advRace: this.advRace,
+        advClass: this.advClass
       })
+      this.$router.push('/portfolio')
     },
-    data() {
-      return {
-        advName: '',
-        advGender: '',
-        advRace: '',
-        advClass: ''
-      }
+    save() {
+      this.$store.dispatch('removeCharacter', this.character.id)
+      this.$store.dispatch('addCharacter', {
+        id: this.character.id,
+        advName: this.advName,
+        advGender: this.advGender,
+        advRace: this.advRace,
+        advClass: this.advClass
+      })
+      this.$router.push('/portfolio')
     },
-    created() {
-      this.assignValues
-    },
-    methods: {
-      add() {
-        this.$store.dispatch('addCharacter', {
-          id: short.generate(),
-          advName: this.advName,
-          advGender: this.advGender,
-          advRace: this.advRace,
-          advClass: this.advClass
-        })
-        this.$router.push('/portfolio')
-      },
-      save() {
-        this.$store.dispatch('removeCharacter', this.character.id)
-        this.$store.dispatch('addCharacter', {
-          id: this.character.id,
-          advName: this.advName,
-          advGender: this.advGender,
-          advRace: this.advRace,
-          advClass: this.advClass
-        })
-        this.$router.push('/portfolio')
-      },
-      async assignValues() {
-        await this.$nextTick
-        this.advName = this.character.advName
-        this.advGender = this.character.advGender
-        this.advRace = this.character.advRace
-        this.advClass = this.character.advClass
-      }
+    async assignValues() {
+      await this.$nextTick
+      this.advName = this.character.advName
+      this.advGender = this.character.advGender
+      this.advRace = this.character.advRace
+      this.advClass = this.character.advClass
     }
   }
 }
+//}
 </script>
 
 <style lang="scss" scoped></style>
