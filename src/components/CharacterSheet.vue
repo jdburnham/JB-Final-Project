@@ -43,7 +43,7 @@
     <label class="block mt-4">
       <span class="text-gray-700">Adventurer Race</span>
       <select v-model="advRace" class="form-select mt-1 block w-full">
-        <option value="" disabled selected hidden>Select a Race</option>
+        <option value disabled selected hidden>Select a Race</option>
         <option>Human</option>
         <option>Elf</option>
         <option>Dwarf</option>
@@ -53,7 +53,7 @@
     <label class="block mt-4">
       <span class="text-gray-700">Adventurer class</span>
       <select v-model="advClass" class="form-select mt-1 block w-full">
-        <option value="" disabled selected hidden>Select a Class</option>
+        <option value disabled selected hidden>Select a Class</option>
         <option>Fighter</option>
         <option>Archer</option>
         <option>Thief</option>
@@ -65,20 +65,20 @@
       <div class="mt-2">
         <div>
           <label class="inline-flex items-center">
-            <input type="checkbox" class="form-checkbox" checked />
-            <span class="ml-2">Option 1</span>
+            <input type="checkbox" class="form-checkbox" />
+            <span class="ml-2">Acrobatics (DEX)</span>
           </label>
         </div>
         <div>
           <label class="inline-flex items-center">
             <input type="checkbox" class="form-checkbox" />
-            <span class="ml-2">Option 2</span>
+            <span class="ml-2">Arcana (INT)</span>
           </label>
         </div>
         <div>
           <label class="inline-flex items-center">
             <input type="checkbox" class="form-checkbox" />
-            <span class="ml-2">Option 3</span>
+            <span class="ml-2">Athletics (STR)</span>
           </label>
         </div>
       </div>
@@ -109,6 +109,7 @@
 </template>
 
 <script>
+import short from 'short-uuid'
 export default {
   name: 'CharacterSheet',
   // props: {
@@ -116,7 +117,7 @@ export default {
   //     type: Boolean,
   //     default: false
   //   },
-  //   adventurer: {
+  //   character: {
   //     type: Object,
   //     default: () => ({
   //       id: '',
@@ -132,6 +133,18 @@ export default {
       advGender: '',
       advRace: '',
       advClass: ''
+    }
+  },
+  methods: {
+    add() {
+      this.$store.dispatch('addCharacter', {
+        id: short.generate(),
+        advName: this.advName,
+        advGender: this.advGender,
+        advRace: this.advRace,
+        advClass: this.advClass
+      })
+      this.$router.push('/portfolio')
     }
   }
 }

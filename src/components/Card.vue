@@ -10,10 +10,16 @@
       </div>
       <div class="relative px-4 -mt-16">
         <div class="bg-white p-6 shadow-lg">
-          <h4 class="mt-1 font-bold leading-tight truncate">Hero Name</h4>
-          <div class="mt-1">Race & Class</div>
+          <h4 class="mt-1 font-bold leading-tight truncate">
+            {{ character.advName }}
+          </h4>
+          <div class="mt-1">
+            {{ character.advRace }} {{ character.advClass }}
+          </div>
           <button class="text-green-500 mt-2 pr-2">Edit</button>
-          <button class="text-red-500 mt-2 pr-2">Delete</button>
+          <button class="text-red-500 mt-2" @click="remove(character.id)">
+            Delete
+          </button>
         </div>
       </div>
     </div>
@@ -22,9 +28,25 @@
 
 <script>
 export default {
-  name: 'Card'
+  name: 'Card',
+  props: {
+    character: {
+      type: Object,
+      default: () => ({
+        id: 0,
+        advName: '',
+        advGender: '',
+        advRace: '',
+        advClass: ''
+      })
+    }
+  },
+  methods: {
+    remvoe(id) {
+      this.$store.dispatch('removeCharacter', id)
+    }
+  }
 }
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>
