@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 import Feedback from '../views/Feedback.vue'
 import Portfolio from '../views/UserPortfolio.vue'
+import AddCharacter from '../views/AddCharacter.vue'
 import store from '../store'
 
 Vue.use(VueRouter)
@@ -28,6 +29,12 @@ const routes = [
     path: '/portfolio',
     name: 'portfolio',
     component: Portfolio
+    //meta: { requiresAuth: true }
+  },
+  {
+    path: '/addCharacter',
+    name: 'addCharacter',
+    component: AddCharacter
     //meta: { requiresAuth: true }
   }
 ]
