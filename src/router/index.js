@@ -5,6 +5,7 @@ import Login from '../views/Login.vue'
 import Feedback from '../views/Feedback.vue'
 import Portfolio from '../views/UserPortfolio.vue'
 import AddCharacter from '../views/AddCharacter.vue'
+import EditCharacter from '../views/EditCharacter.vue'
 import store from '../store'
 
 Vue.use(VueRouter)
@@ -35,6 +36,12 @@ const routes = [
     path: '/addCharacter',
     name: 'addCharacter',
     component: AddCharacter
+    //meta: { requiresAuth: true }
+  },
+  {
+    path: '/editCharacter',
+    name: 'editCharacter',
+    component: EditCharacter
     //meta: { requiresAuth: true }
   }
 ]

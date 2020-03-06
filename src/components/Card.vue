@@ -42,8 +42,11 @@ export default {
     }
   },
   methods: {
-    remvoe(id) {
+    remove(id) {
       this.$store.dispatch('removeCharacter', id)
+    },
+    edit(id) {
+      this.$store.push({ path: '/editCharacter', query: { id } })
     }
   }
 }

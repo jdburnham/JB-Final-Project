@@ -95,7 +95,7 @@
         class="bg-blue-700 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded mt-4 flex-grow"
         @click="add"
       >
-        Save
+        Add
       </button>
       <button
         v-else
@@ -112,43 +112,64 @@
 import short from 'short-uuid'
 export default {
   name: 'CharacterSheet',
-  // props: {
-  //   edit: {
-  //     type: Boolean,
-  //     default: false
-  //   },
-  //   character: {
-  //     type: Object,
-  //     default: () => ({
-  //       id: '',
-  //       advName: '',
-  //       advGender: '',
-  //       advRace: '',
-  //       advClass: ''
-  //     })
-  //   },
-  data() {
-    return {
-      advName: '',
-      advGender: '',
-      advRace: '',
-      advClass: ''
-    }
-  },
-  methods: {
-    add() {
-      this.$store.dispatch('addCharacter', {
-        id: short.generate(),
-        advName: this.advName,
-        advGender: this.advGender,
-        advRace: this.advRace,
-        advClass: this.advClass
+  props: {
+    edit: {
+      type: Boolean,
+      default: false
+    },
+    character: {
+      type: Object,
+      default: () => ({
+        id: '',
+        advName: '',
+        advGender: '',
+        advRace: '',
+        advClass: ''
       })
-      this.$router.push('/portfolio')
+    },
+    data() {
+      return {
+        advName: '',
+        advGender: '',
+        advRace: '',
+        advClass: ''
+      }
+    },
+    created() {
+      this.assignValues
+    },
+    methods: {
+      add() {
+        this.$store.dispatch('addCharacter', {
+          id: short.generate(),
+          advName: this.advName,
+          advGender: this.advGender,
+          advRace: this.advRace,
+          advClass: this.advClass
+        })
+        this.$router.push('/portfolio')
+      },
+      save() {
+        this.$store.dispatch('removeCharacter', this.character.id)
+        this.$store.dispatch('addCharacter', {
+          id: this.character.id,
+          advName: this.advName,
+          advGender: this.advGender,
+          advRace: this.advRace,
+          advClass: this.advClass
+        })
+        this.$router.push('/portfolio')
+      },
+      async assignValues() {
+        await this.$nextTick
+        this.advName = this.character.advName
+        this.advGender = this.character.advGender
+        this.advRace = this.character.advRace
+        this.advClass = this.character.advClass
+      }
     }
   }
 }
-//}
 </script>
 
 <style lang="scss" scoped></style>
