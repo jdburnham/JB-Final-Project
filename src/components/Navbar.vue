@@ -22,11 +22,7 @@
         class="p-2 mx-1 hover:text-red-800 hover:bg-blue-300"
         @click="logout"
       >Logout</button>
-      <router-link
-        v-if="user"
-        class="p-2 mx-1 hover:text-red-800 hover:bg-blue-300"
-        to="/portfolio"
-      >Portfolio</router-link>
+      <router-link class="p-2 mx-1 hover:text-red-800 hover:bg-blue-300" to="/portfolio">Portfolio</router-link>
       <router-link class="p-2 mx-1 hover:text-red-800 hover:bg-blue-300" to="/feedback">Feedback</router-link>
     </div>
   </nav>

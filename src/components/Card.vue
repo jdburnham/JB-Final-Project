@@ -10,16 +10,10 @@
       </div>
       <div class="relative px-4 -mt-16">
         <div class="bg-white p-6 shadow-lg">
-          <h4 class="mt-1 font-bold leading-tight truncate">
-            {{ character.advName }}
-          </h4>
-          <div class="mt-1">
-            {{ character.advRace }} {{ character.advClass }}
-          </div>
-          <button class="text-green-500 mt-2 pr-2">Edit</button>
-          <button class="text-red-500 mt-2" @click="remove(character.id)">
-            Delete
-          </button>
+          <h4 class="mt-1 font-bold leading-tight truncate">{{ character.advName }}</h4>
+          <div class="mt-1">{{ character.advRace }} {{ character.advClass }}</div>
+          <button class="text-green-500 mt-2 pr-2" @click="edit(character.id)">Edit</button>
+          <button class="text-red-500 mt-2" @click="remove(character.id)">Delete</button>
         </div>
       </div>
     </div>
@@ -46,7 +40,7 @@ export default {
       this.$store.dispatch('removeCharacter', id)
     },
     edit(id) {
-      this.$store.push({ path: '/editCharacter', query: { id } })
+      this.$router.push({ path: '/editCharacter', query: { id } })
     }
   }
 }

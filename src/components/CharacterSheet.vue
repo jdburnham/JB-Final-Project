@@ -3,7 +3,7 @@
     <label class="block">
       <span class="text-gray-700">Adventurer Name</span>
       <input
-        v-model="advName"
+        v-model="dataName"
         class="form-input mt-1 block w-full"
         placeholder="Give your Adventurer a name"
       />
@@ -12,22 +12,22 @@
       <span class="text-gray-700">Adventurer Gender</span>
       <div class="mt-2">
         <label class="inline-flex items-center">
-          <input v-model="advGender" type="radio" class="form-radio" value="male" />
+          <input v-model="dataGender" type="radio" class="form-radio" value="male" />
           <span class="ml-2">Male</span>
         </label>
         <label class="inline-flex items-center ml-6">
-          <input v-model="advGender" type="radio" class="form-radio" value="female" />
+          <input v-model="dataGender" type="radio" class="form-radio" value="female" />
           <span class="ml-2">Female</span>
         </label>
         <label class="inline-flex items-center ml-6">
-          <input v-model="advGender" type="radio" class="form-radio" value="other" />
+          <input v-model="dataGender" type="radio" class="form-radio" value="other" />
           <span class="ml-2">Other</span>
         </label>
       </div>
     </div>
     <label class="block mt-4">
       <span class="text-gray-700">Adventurer Race</span>
-      <select v-model="advRace" class="form-select mt-1 block w-full">
+      <select v-model="dataRace" class="form-select mt-1 block w-full">
         <option value disabled selected hidden>Select a Race</option>
         <option>Human</option>
         <option>Elf</option>
@@ -37,7 +37,7 @@
     </label>
     <label class="block mt-4">
       <span class="text-gray-700">Adventurer class</span>
-      <select v-model="advClass" class="form-select mt-1 block w-full">
+      <select v-model="dataClass" class="form-select mt-1 block w-full">
         <option value disabled selected hidden>Select a Class</option>
         <option>Fighter</option>
         <option>Archer</option>
@@ -91,40 +91,41 @@
 import short from 'short-uuid'
 export default {
   name: 'CharacterSheet',
-  // props: {
-  //   edit: {
-  //     type: Boolean,
-  //     default: false
-  //   },
-  //   character: {
-  //     type: Object,
-  //     default: () => ({
-  //       id: '',
-  //       advName: '',
-  //       advGender: '',
-  //       advRace: '',
-  //       advClass: ''
-  //     })
-  //   },
+  props: {
+    edit: {
+      type: Boolean,
+      default: false
+    },
+    character: {
+      type: Object,
+      default: () => ({
+        id: '',
+        advName: '',
+        advGender: '',
+        advRace: '',
+        advClass: ''
+      })
+    }
+  },
   data() {
     return {
-      advName: '',
-      advGender: '',
-      advRace: '',
-      advClass: ''
+      dataName: '',
+      dataGender: '',
+      dataRace: '',
+      dataClass: ''
     }
   },
   created() {
-    this.assignValues
+    this.assignValues()
   },
   methods: {
     add() {
       this.$store.dispatch('addCharacter', {
         id: short.generate(),
-        advName: this.advName,
-        advGender: this.advGender,
-        advRace: this.advRace,
-        advClass: this.advClass
+        advName: this.dataName,
+        advGender: this.dataGender,
+        advRace: this.dataRace,
+        advClass: this.dataClass
       })
       this.$router.push('/portfolio')
     },
@@ -132,23 +133,22 @@ export default {
       this.$store.dispatch('removeCharacter', this.character.id)
       this.$store.dispatch('addCharacter', {
         id: this.character.id,
-        advName: this.advName,
-        advGender: this.advGender,
-        advRace: this.advRace,
-        advClass: this.advClass
+        advName: this.dataName,
+        advGender: this.dataGender,
+        advRace: this.dataRace,
+        advClass: this.dataClass
       })
       this.$router.push('/portfolio')
     },
     async assignValues() {
       await this.$nextTick
-      this.advName = this.character.advName
-      this.advGender = this.character.advGender
-      this.advRace = this.character.advRace
-      this.advClass = this.character.advClass
+      this.dataName = this.character.advName
+      this.dataGender = this.character.advGender
+      this.dataRace = this.character.advRace
+      this.dataClass = this.character.advClass
     }
   }
 }
-//}
 </script>
 
 <style lang="scss" scoped></style>
