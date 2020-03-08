@@ -20,7 +20,6 @@ export default {
     }
   },
   mounted() {
-    debugger
     if (this.$route.query?.id) {
       const character = this.$store.getters.getCharacter(this.$route.query.id)
       if (character) {

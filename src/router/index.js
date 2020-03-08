@@ -29,20 +29,20 @@ const routes = [
   {
     path: '/portfolio',
     name: 'portfolio',
-    component: Portfolio
-    //meta: { requiresAuth: true }
+    component: Portfolio,
+    meta: { requiresAuth: true }
   },
   {
     path: '/addCharacter',
     name: 'addCharacter',
-    component: AddCharacter
-    //meta: { requiresAuth: true }
+    component: AddCharacter,
+    meta: { requiresAuth: true }
   },
   {
     path: '/editCharacter',
     name: 'editCharacter',
-    component: EditCharacter
-    //meta: { requiresAuth: true }
+    component: EditCharacter,
+    meta: { requiresAuth: true }
   }
 ]
 
