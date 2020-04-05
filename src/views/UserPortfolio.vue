@@ -5,9 +5,9 @@
       to="/addCharacter"
     >
       <div
-        class="bg-yellow-600 w-8 h-8 flex justify-center items-center rounded-full border-dashed border text-black"
+        class="bg-gray-200 w-16 h-8 flex justify-center items-center rounded-full border-dashed border text-black hover:bg-gray-900"
       >
-        <span class="text-purple-800 font-bold">Add</span>
+        <span class="text-gray-800 font-bold hover:text-gray-200">Add</span>
       </div>
     </router-link>
     <Card

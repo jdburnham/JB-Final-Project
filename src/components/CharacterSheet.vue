@@ -45,13 +45,122 @@
         <option>Wizard</option>
       </select>
     </label>
+    <table class="table-fixed">
+      <thead>
+        <tr>
+          <th class="w-1/2 px-4 py-2">Attribute</th>
+          <th class="w-1/4 px-4 py-2">Ability Score</th>
+          <th class="w-1/4 px-4 py-2">Modifier</th>
+          <th class="w-1/4 px-4 py-2">Points Remaining: {{ dataPoints }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="border px-4 py-2">Strength</td>
+          <td class="border px-4 py-2">
+            <button
+              @click="subStrPoint"
+              class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            >-</button>
+            {{ dataStr }}
+            <button
+              @click="addStrPoint"
+              class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            >+</button>
+          </td>
+          <td class="border px-4 py-2">{{ calcModifier(dataStr) }}</td>
+        </tr>
+        <tr>
+          <td class="border px-4 py-2">Dexterity</td>
+          <td class="border px-4 py-2">
+            <button
+              @click="subDexPoint"
+              class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            >-</button>
+            {{ dataDex }}
+            <button
+              @click="addDexPoint"
+              class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            >+</button>
+          </td>
+          <td class="border px-4 py-2">{{ calcModifier(dataDex) }}</td>
+        </tr>
+        <tr>
+          <td class="border px-4 py-2">Constitution</td>
+          <td class="border px-4 py-2">
+            <button
+              @click="subConPoint"
+              class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            >-</button>
+            {{ dataCon }}
+            <button
+              @click="addConPoint"
+              class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            >+</button>
+          </td>
+          <td class="border px-4 py-2">{{ calcModifier(dataCon) }}</td>
+        </tr>
+        <tr>
+          <td class="border px-4 py-2">Intelligence</td>
+          <td class="border px-4 py-2">
+            <button
+              @click="subIntPoint"
+              class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            >-</button>
+            {{ dataInt }}
+            <button
+              @click="addIntPoint"
+              class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            >+</button>
+          </td>
+          <td class="border px-4 py-2">{{ calcModifier(dataInt) }}</td>
+        </tr>
+        <tr>
+          <td class="border px-4 py-2">Wisdom</td>
+          <td class="border px-4 py-2">
+            <button
+              @click="subWisPoint"
+              class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            >-</button>
+            {{ dataWis }}
+            <button
+              @click="addWisPoint"
+              class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            >+</button>
+          </td>
+          <td class="border px-4 py-2">{{ calcModifier(dataWis) }}</td>
+        </tr>
+        <tr>
+          <td class="border px-4 py-2">Charisma</td>
+          <td class="border px-4 py-2">
+            <button
+              @click="subCharismaPoint"
+              class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            >-</button>
+            {{ dataCha }}
+            <button
+              @click="addCharismaPoint"
+              class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            >+</button>
+          </td>
+          <td class="border px-4 py-2">{{ calcModifier(dataCha) }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <br />
     <div class="block">
-      <span class="text-gray-700">Adventurer Skills</span>
+      <span class="text-gray-700">Select 3 Adventurer Skills</span>
       <div class="mt-2">
         <div>
           <label class="inline-flex items-center">
             <input type="checkbox" class="form-checkbox" />
             <span class="ml-2">Acrobatics (DEX)</span>
+          </label>
+        </div>
+        <div>
+          <label class="inline-flex items-center">
+            <input type="checkbox" class="form-checkbox" />
+            <span class="ml-2">Animal Handling (WIS)</span>
           </label>
         </div>
         <div>
@@ -64,6 +173,84 @@
           <label class="inline-flex items-center">
             <input type="checkbox" class="form-checkbox" />
             <span class="ml-2">Athletics (STR)</span>
+          </label>
+        </div>
+        <div>
+          <label class="inline-flex items-center">
+            <input type="checkbox" class="form-checkbox" />
+            <span class="ml-2">Deception (CHA)</span>
+          </label>
+        </div>
+        <div>
+          <label class="inline-flex items-center">
+            <input type="checkbox" class="form-checkbox" />
+            <span class="ml-2">History (INT)</span>
+          </label>
+        </div>
+        <div>
+          <label class="inline-flex items-center">
+            <input type="checkbox" class="form-checkbox" />
+            <span class="ml-2">Insight (WIS)</span>
+          </label>
+        </div>
+        <div>
+          <label class="inline-flex items-center">
+            <input type="checkbox" class="form-checkbox" />
+            <span class="ml-2">Intimidation (CHA)</span>
+          </label>
+        </div>
+        <div>
+          <label class="inline-flex items-center">
+            <input type="checkbox" class="form-checkbox" />
+            <span class="ml-2">Medicine (WIS)</span>
+          </label>
+        </div>
+        <div>
+          <label class="inline-flex items-center">
+            <input type="checkbox" class="form-checkbox" />
+            <span class="ml-2">Nature (INT)</span>
+          </label>
+        </div>
+        <div>
+          <label class="inline-flex items-center">
+            <input type="checkbox" class="form-checkbox" />
+            <span class="ml-2">Perception (WIS)</span>
+          </label>
+        </div>
+        <div>
+          <label class="inline-flex items-center">
+            <input type="checkbox" class="form-checkbox" />
+            <span class="ml-2">Performance (CHA)</span>
+          </label>
+        </div>
+        <div>
+          <label class="inline-flex items-center">
+            <input type="checkbox" class="form-checkbox" />
+            <span class="ml-2">Persuassion (CHA)</span>
+          </label>
+        </div>
+        <div>
+          <label class="inline-flex items-center">
+            <input type="checkbox" class="form-checkbox" />
+            <span class="ml-2">Religion (INT)</span>
+          </label>
+        </div>
+        <div>
+          <label class="inline-flex items-center">
+            <input type="checkbox" class="form-checkbox" />
+            <span class="ml-2">Sleight of Hand (DEX)</span>
+          </label>
+        </div>
+        <div>
+          <label class="inline-flex items-center">
+            <input type="checkbox" class="form-checkbox" />
+            <span class="ml-2">Stealth (DEX)</span>
+          </label>
+        </div>
+        <div>
+          <label class="inline-flex items-center">
+            <input type="checkbox" class="form-checkbox" />
+            <span class="ml-2">Survival (WIS)</span>
           </label>
         </div>
       </div>
@@ -103,7 +290,15 @@ export default {
         advName: '',
         advGender: '',
         advRace: '',
-        advClass: ''
+        advClass: '',
+        advPoints: 21,
+        advStr: 8,
+        advStrMod: '',
+        advDex: 8,
+        advCon: 8,
+        advInt: 8,
+        advWis: 8,
+        advCha: 8
       })
     }
   },
@@ -112,7 +307,15 @@ export default {
       dataName: '',
       dataGender: '',
       dataRace: '',
-      dataClass: ''
+      dataClass: '',
+      dataPoints: 21,
+      dataStr: 8,
+      dataModifier: '',
+      dataDex: 8,
+      dataCon: 8,
+      dataInt: 8,
+      dataWis: 8,
+      dataCha: 8
     }
   },
   created() {
@@ -125,7 +328,14 @@ export default {
         advName: this.dataName,
         advGender: this.dataGender,
         advRace: this.dataRace,
-        advClass: this.dataClass
+        advClass: this.dataClass,
+        advPoints: this.dataPoints,
+        advStr: this.dataStr,
+        advDex: this.dataDex,
+        advCon: this.dataCon,
+        advInt: this.dataInt,
+        advWis: this.dataWis,
+        advCha: this.dataCha
       })
       this.$router.push('/portfolio')
     },
@@ -136,7 +346,14 @@ export default {
         advName: this.dataName,
         advGender: this.dataGender,
         advRace: this.dataRace,
-        advClass: this.dataClass
+        advClass: this.dataClass,
+        advPoints: this.dataPoints,
+        advStr: this.dataStr,
+        advDex: this.dataDex,
+        advCon: this.dataCon,
+        advInt: this.dataInt,
+        advWis: this.dataWis,
+        advCha: this.dataCha
       })
       this.$router.push('/portfolio')
     },
@@ -146,6 +363,119 @@ export default {
       this.dataGender = this.character.advGender
       this.dataRace = this.character.advRace
       this.dataClass = this.character.advClass
+      this.dataPoints = this.character.advPoints
+      this.dataStr = this.character.advStr
+      this.dataDex = this.character.advDex
+      this.dataCon = this.character.advCon
+      this.dataInt = this.character.advInt
+      this.dataWis = this.character.advWis
+      this.dataCha = this.character.advCha
+    },
+    addStrPoint() {
+      if (this.dataPoints !== 0) {
+        if (this.dataStr < 15) {
+          this.dataPoints--
+          this.dataStr++
+        }
+      }
+    },
+    subStrPoint() {
+      if (this.dataPoints !== 21) {
+        if (this.dataStr > 8) {
+          this.dataPoints++
+          this.dataStr--
+        }
+      }
+    },
+    addDexPoint() {
+      if (this.dataPoints !== 0) {
+        if (this.dataDex < 15) {
+          this.dataPoints--
+          this.dataDex++
+        }
+      }
+    },
+    subDexPoint() {
+      if (this.dataPoints !== 21) {
+        if (this.dataDex > 8) {
+          this.dataPoints++
+          this.dataDex--
+        }
+      }
+    },
+    addConPoint() {
+      if (this.dataPoints !== 0) {
+        if (this.dataCon < 15) {
+          this.dataPoints--
+          this.dataCon++
+        }
+      }
+    },
+    subConPoint() {
+      if (this.dataPoints !== 21) {
+        if (this.dataCon > 8) {
+          this.dataPoints++
+          this.dataCon--
+        }
+      }
+    },
+    addIntPoint() {
+      if (this.dataPoints !== 0) {
+        if (this.dataInt < 15) {
+          this.dataPoints--
+          this.dataInt++
+        }
+      }
+    },
+    subIntPoint() {
+      if (this.dataPoints !== 21) {
+        if (this.dataInt > 8) {
+          this.dataPoints++
+          this.dataInt--
+        }
+      }
+    },
+    addWisPoint() {
+      if (this.dataPoints !== 0) {
+        if (this.dataWis < 15) {
+          this.dataPoints--
+          this.dataWis++
+        }
+      }
+    },
+    subWisPoint() {
+      if (this.dataPoints !== 21) {
+        if (this.dataWis > 8) {
+          this.dataPoints++
+          this.dataWis--
+        }
+      }
+    },
+    addCharismaPoint() {
+      if (this.dataPoints !== 0) {
+        if (this.dataCha < 15) {
+          this.dataPoints--
+          this.dataCha++
+        }
+      }
+    },
+    subCharismaPoint() {
+      if (this.dataPoints !== 21) {
+        if (this.dataCha > 8) {
+          this.dataPoints++
+          this.dataCha--
+        }
+      }
+    },
+    //Pass score in, calculate modifier, return modifier
+    calcModifier(score) {
+      if (score < 10) {
+        let dataModifer = parseInt((score - 11) / 2)
+        return dataModifer
+      } else {
+        let dataModifier = parseInt((score - 10) / 2)
+        return dataModifier
+      }
     }
   }
 }
