@@ -10,7 +10,7 @@ export default {
       callbacks: {
         signInSuccessWithAuthResult: authResult => {
           this.$store.dispatch('setUser', authResult.user)
-          this.$router.push('/')
+          this.$router.push('/portfolio')
           return false
         }
       },

@@ -293,12 +293,12 @@ export default {
         advClass: '',
         advPoints: 21,
         advStr: 8,
-        advStrMod: '',
         advDex: 8,
         advCon: 8,
         advInt: 8,
         advWis: 8,
-        advCha: 8
+        advCha: 8,
+        advSkills: []
       })
     }
   },
@@ -310,12 +310,12 @@ export default {
       dataClass: '',
       dataPoints: 21,
       dataStr: 8,
-      dataModifier: '',
       dataDex: 8,
       dataCon: 8,
       dataInt: 8,
       dataWis: 8,
-      dataCha: 8
+      dataCha: 8,
+      dataSkills: []
     }
   },
   created() {
