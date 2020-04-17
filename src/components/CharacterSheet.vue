@@ -12,15 +12,30 @@
       <span class="text-gray-700">Adventurer Gender</span>
       <div class="mt-2">
         <label class="inline-flex items-center">
-          <input v-model="dataGender" type="radio" class="form-radio" value="male" />
+          <input
+            v-model="dataGender"
+            type="radio"
+            class="form-radio"
+            value="male"
+          />
           <span class="ml-2">Male</span>
         </label>
         <label class="inline-flex items-center ml-6">
-          <input v-model="dataGender" type="radio" class="form-radio" value="female" />
+          <input
+            v-model="dataGender"
+            type="radio"
+            class="form-radio"
+            value="female"
+          />
           <span class="ml-2">Female</span>
         </label>
         <label class="inline-flex items-center ml-6">
-          <input v-model="dataGender" type="radio" class="form-radio" value="other" />
+          <input
+            v-model="dataGender"
+            type="radio"
+            class="form-radio"
+            value="other"
+          />
           <span class="ml-2">Other</span>
         </label>
       </div>
@@ -29,19 +44,32 @@
       <span class="text-gray-700">Adventurer Race</span>
       <select v-model="dataRace" class="form-select mt-1 block w-full">
         <option value disabled selected hidden>Select a Race</option>
-        <option>Human</option>
-        <option>Elf</option>
+        <option>Dragonborn</option>
         <option>Dwarf</option>
+        <option>Elf</option>
+        <option>Gnome</option>
+        <option>Half-Elf</option>
+        <option>Half-Orc</option>
         <option>Halfling</option>
+        <option>Human</option>
+        <option>Tiefling</option>
       </select>
     </label>
     <label class="block mt-4">
       <span class="text-gray-700">Adventurer class</span>
       <select v-model="dataClass" class="form-select mt-1 block w-full">
         <option value disabled selected hidden>Select a Class</option>
+        <option>Barbarian</option>
+        <option>Bard</option>
+        <option>Cleric</option>
+        <option>Druid</option>
         <option>Fighter</option>
-        <option>Archer</option>
-        <option>Thief</option>
+        <option>Monk</option>
+        <option>Paladin</option>
+        <option>Ranger</option>
+        <option>Rogue</option>
+        <option>Sorcerer</option>
+        <option>Warlock</option>
         <option>Wizard</option>
       </select>
     </label>
@@ -61,12 +89,16 @@
             <button
               @click="subStrPoint"
               class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-            >-</button>
+            >
+              -
+            </button>
             {{ dataStr }}
             <button
               @click="addStrPoint"
               class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-            >+</button>
+            >
+              +
+            </button>
           </td>
           <td class="border px-4 py-2">{{ calcModifier(dataStr) }}</td>
         </tr>
@@ -76,12 +108,16 @@
             <button
               @click="subDexPoint"
               class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-            >-</button>
+            >
+              -
+            </button>
             {{ dataDex }}
             <button
               @click="addDexPoint"
               class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-            >+</button>
+            >
+              +
+            </button>
           </td>
           <td class="border px-4 py-2">{{ calcModifier(dataDex) }}</td>
         </tr>
@@ -91,12 +127,16 @@
             <button
               @click="subConPoint"
               class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-            >-</button>
+            >
+              -
+            </button>
             {{ dataCon }}
             <button
               @click="addConPoint"
               class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-            >+</button>
+            >
+              +
+            </button>
           </td>
           <td class="border px-4 py-2">{{ calcModifier(dataCon) }}</td>
         </tr>
@@ -106,12 +146,16 @@
             <button
               @click="subIntPoint"
               class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-            >-</button>
+            >
+              -
+            </button>
             {{ dataInt }}
             <button
               @click="addIntPoint"
               class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-            >+</button>
+            >
+              +
+            </button>
           </td>
           <td class="border px-4 py-2">{{ calcModifier(dataInt) }}</td>
         </tr>
@@ -121,12 +165,16 @@
             <button
               @click="subWisPoint"
               class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-            >-</button>
+            >
+              -
+            </button>
             {{ dataWis }}
             <button
               @click="addWisPoint"
               class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-            >+</button>
+            >
+              +
+            </button>
           </td>
           <td class="border px-4 py-2">{{ calcModifier(dataWis) }}</td>
         </tr>
@@ -136,12 +184,16 @@
             <button
               @click="subCharismaPoint"
               class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-            >-</button>
+            >
+              -
+            </button>
             {{ dataCha }}
             <button
               @click="addCharismaPoint"
               class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-            >+</button>
+            >
+              +
+            </button>
           </td>
           <td class="border px-4 py-2">{{ calcModifier(dataCha) }}</td>
         </tr>
@@ -153,7 +205,12 @@
       <div class="mt-2">
         <div>
           <label class="inline-flex items-center">
-            <input v-model="dataSkills" type="checkbox" class="form-checkbox" value="acrobatics" />
+            <input
+              v-model="dataSkills"
+              type="checkbox"
+              class="form-checkbox"
+              value="acrobatics"
+            />
             <span class="ml-2">Acrobatics (DEX)</span>
           </label>
         </div>
@@ -170,73 +227,133 @@
         </div>
         <div>
           <label class="inline-flex items-center">
-            <input v-model="dataSkills" type="checkbox" class="form-checkbox" value="arcana" />
+            <input
+              v-model="dataSkills"
+              type="checkbox"
+              class="form-checkbox"
+              value="arcana"
+            />
             <span class="ml-2">Arcana (INT)</span>
           </label>
         </div>
         <div>
           <label class="inline-flex items-center">
-            <input v-model="dataSkills" type="checkbox" class="form-checkbox" value="athletics" />
+            <input
+              v-model="dataSkills"
+              type="checkbox"
+              class="form-checkbox"
+              value="athletics"
+            />
             <span class="ml-2">Athletics (STR)</span>
           </label>
         </div>
         <div>
           <label class="inline-flex items-center">
-            <input v-model="dataSkills" type="checkbox" class="form-checkbox" value="deception" />
+            <input
+              v-model="dataSkills"
+              type="checkbox"
+              class="form-checkbox"
+              value="deception"
+            />
             <span class="ml-2">Deception (CHA)</span>
           </label>
         </div>
         <div>
           <label class="inline-flex items-center">
-            <input v-model="dataSkills" type="checkbox" class="form-checkbox" value="history" />
+            <input
+              v-model="dataSkills"
+              type="checkbox"
+              class="form-checkbox"
+              value="history"
+            />
             <span class="ml-2">History (INT)</span>
           </label>
         </div>
         <div>
           <label class="inline-flex items-center">
-            <input v-model="dataSkills" type="checkbox" class="form-checkbox" value="insight" />
+            <input
+              v-model="dataSkills"
+              type="checkbox"
+              class="form-checkbox"
+              value="insight"
+            />
             <span class="ml-2">Insight (WIS)</span>
           </label>
         </div>
         <div>
           <label class="inline-flex items-center">
-            <input v-model="dataSkills" type="checkbox" class="form-checkbox" value="intimidation" />
+            <input
+              v-model="dataSkills"
+              type="checkbox"
+              class="form-checkbox"
+              value="intimidation"
+            />
             <span class="ml-2">Intimidation (CHA)</span>
           </label>
         </div>
         <div>
           <label class="inline-flex items-center">
-            <input v-model="dataSkills" type="checkbox" class="form-checkbox" value="medicine" />
+            <input
+              v-model="dataSkills"
+              type="checkbox"
+              class="form-checkbox"
+              value="medicine"
+            />
             <span class="ml-2">Medicine (WIS)</span>
           </label>
         </div>
         <div>
           <label class="inline-flex items-center">
-            <input v-model="dataSkills" type="checkbox" class="form-checkbox" value="nature" />
+            <input
+              v-model="dataSkills"
+              type="checkbox"
+              class="form-checkbox"
+              value="nature"
+            />
             <span class="ml-2">Nature (INT)</span>
           </label>
         </div>
         <div>
           <label class="inline-flex items-center">
-            <input v-model="dataSkills" type="checkbox" class="form-checkbox" value="perception" />
+            <input
+              v-model="dataSkills"
+              type="checkbox"
+              class="form-checkbox"
+              value="perception"
+            />
             <span class="ml-2">Perception (WIS)</span>
           </label>
         </div>
         <div>
           <label class="inline-flex items-center">
-            <input v-model="dataSkills" type="checkbox" class="form-checkbox" value="performance" />
+            <input
+              v-model="dataSkills"
+              type="checkbox"
+              class="form-checkbox"
+              value="performance"
+            />
             <span class="ml-2">Performance (CHA)</span>
           </label>
         </div>
         <div>
           <label class="inline-flex items-center">
-            <input v-model="dataSkills" type="checkbox" class="form-checkbox" value="persuassion" />
+            <input
+              v-model="dataSkills"
+              type="checkbox"
+              class="form-checkbox"
+              value="persuassion"
+            />
             <span class="ml-2">Persuassion (CHA)</span>
           </label>
         </div>
         <div>
           <label class="inline-flex items-center">
-            <input v-model="dataSkills" type="checkbox" class="form-checkbox" value="religion" />
+            <input
+              v-model="dataSkills"
+              type="checkbox"
+              class="form-checkbox"
+              value="religion"
+            />
             <span class="ml-2">Religion (INT)</span>
           </label>
         </div>
@@ -253,13 +370,23 @@
         </div>
         <div>
           <label class="inline-flex items-center">
-            <input v-model="dataSkills" type="checkbox" class="form-checkbox" value="stealth" />
+            <input
+              v-model="dataSkills"
+              type="checkbox"
+              class="form-checkbox"
+              value="stealth"
+            />
             <span class="ml-2">Stealth (DEX)</span>
           </label>
         </div>
         <div>
           <label class="inline-flex items-center">
-            <input v-model="dataSkills" type="checkbox" class="form-checkbox" value="survival" />
+            <input
+              v-model="dataSkills"
+              type="checkbox"
+              class="form-checkbox"
+              value="survival"
+            />
             <span class="ml-2">Survival (WIS)</span>
           </label>
         </div>
@@ -269,22 +396,29 @@
       <button
         class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mt-4 mr-4 flex-grow"
         @click="$router.push('/portfolio')"
-      >Cancel</button>
+      >
+        Cancel
+      </button>
       <button
         v-if="!edit"
         class="bg-blue-700 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded mt-4 flex-grow"
         @click="add"
-      >Add</button>
+      >
+        Add
+      </button>
       <button
         v-else
         class="bg-green-700 hover:bg-green-900 text-white font-bold py-2 px-4 rounded mt-4 flex-grow"
         @click="save"
-      >Edit</button>
+      >
+        Edit
+      </button>
     </div>
   </div>
 </template>
 
 <script>
+import { db } from '../helpers/firebase'
 import short from 'short-uuid'
 export default {
   name: 'CharacterSheet',
