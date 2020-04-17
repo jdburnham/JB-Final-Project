@@ -11,26 +11,35 @@
         You are logged in as
         <span class="font-normal">{{ user.displayName }}</span>
       </span>
-      <router-link class="p-2 mx-1 font-bold hover:text-red-800 hover:bg-blue-900" to="/">Home</router-link>
+      <router-link
+        class="p-2 mx-1 font-bold hover:text-red-800 hover:bg-blue-900"
+        to="/"
+        >Home</router-link
+      >
       <router-link
         v-if="!user"
         class="p-2 mx-1 font-bold hover:text-red-800 hover:bg-blue-900"
         to="/login"
-      >Login</router-link>
+        >Login</router-link
+      >
       <button
         v-if="user"
         class="p-2 mx-1 font-bold hover:text-red-800 hover:bg-blue-900"
         @click="logout"
-      >Logout</button>
+      >
+        Logout
+      </button>
       <router-link
         v-if="user"
         class="p-2 mx-1 font-bold hover:text-red-800 hover:bg-blue-900"
         to="/portfolio"
-      >Portfolio</router-link>
+        >Portfolio</router-link
+      >
       <router-link
         class="p-2 mx-1 font-bold hover:text-red-800 hover:bg-blue-900"
         to="/feedback"
-      >Feedback</router-link>
+        >Feedback</router-link
+      >
     </div>
   </nav>
 </template>
