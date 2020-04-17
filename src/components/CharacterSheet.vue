@@ -153,103 +153,113 @@
       <div class="mt-2">
         <div>
           <label class="inline-flex items-center">
-            <input type="checkbox" class="form-checkbox" />
+            <input v-model="dataSkills" type="checkbox" class="form-checkbox" value="acrobatics" />
             <span class="ml-2">Acrobatics (DEX)</span>
           </label>
         </div>
         <div>
           <label class="inline-flex items-center">
-            <input type="checkbox" class="form-checkbox" />
+            <input
+              v-model="dataSkills"
+              type="checkbox"
+              class="form-checkbox"
+              value="animal handling"
+            />
             <span class="ml-2">Animal Handling (WIS)</span>
           </label>
         </div>
         <div>
           <label class="inline-flex items-center">
-            <input type="checkbox" class="form-checkbox" />
+            <input v-model="dataSkills" type="checkbox" class="form-checkbox" value="arcana" />
             <span class="ml-2">Arcana (INT)</span>
           </label>
         </div>
         <div>
           <label class="inline-flex items-center">
-            <input type="checkbox" class="form-checkbox" />
+            <input v-model="dataSkills" type="checkbox" class="form-checkbox" value="athletics" />
             <span class="ml-2">Athletics (STR)</span>
           </label>
         </div>
         <div>
           <label class="inline-flex items-center">
-            <input type="checkbox" class="form-checkbox" />
+            <input v-model="dataSkills" type="checkbox" class="form-checkbox" value="deception" />
             <span class="ml-2">Deception (CHA)</span>
           </label>
         </div>
         <div>
           <label class="inline-flex items-center">
-            <input type="checkbox" class="form-checkbox" />
+            <input v-model="dataSkills" type="checkbox" class="form-checkbox" value="history" />
             <span class="ml-2">History (INT)</span>
           </label>
         </div>
         <div>
           <label class="inline-flex items-center">
-            <input type="checkbox" class="form-checkbox" />
+            <input v-model="dataSkills" type="checkbox" class="form-checkbox" value="insight" />
             <span class="ml-2">Insight (WIS)</span>
           </label>
         </div>
         <div>
           <label class="inline-flex items-center">
-            <input type="checkbox" class="form-checkbox" />
+            <input v-model="dataSkills" type="checkbox" class="form-checkbox" value="intimidation" />
             <span class="ml-2">Intimidation (CHA)</span>
           </label>
         </div>
         <div>
           <label class="inline-flex items-center">
-            <input type="checkbox" class="form-checkbox" />
+            <input v-model="dataSkills" type="checkbox" class="form-checkbox" value="medicine" />
             <span class="ml-2">Medicine (WIS)</span>
           </label>
         </div>
         <div>
           <label class="inline-flex items-center">
-            <input type="checkbox" class="form-checkbox" />
+            <input v-model="dataSkills" type="checkbox" class="form-checkbox" value="nature" />
             <span class="ml-2">Nature (INT)</span>
           </label>
         </div>
         <div>
           <label class="inline-flex items-center">
-            <input type="checkbox" class="form-checkbox" />
+            <input v-model="dataSkills" type="checkbox" class="form-checkbox" value="perception" />
             <span class="ml-2">Perception (WIS)</span>
           </label>
         </div>
         <div>
           <label class="inline-flex items-center">
-            <input type="checkbox" class="form-checkbox" />
+            <input v-model="dataSkills" type="checkbox" class="form-checkbox" value="performance" />
             <span class="ml-2">Performance (CHA)</span>
           </label>
         </div>
         <div>
           <label class="inline-flex items-center">
-            <input type="checkbox" class="form-checkbox" />
+            <input v-model="dataSkills" type="checkbox" class="form-checkbox" value="persuassion" />
             <span class="ml-2">Persuassion (CHA)</span>
           </label>
         </div>
         <div>
           <label class="inline-flex items-center">
-            <input type="checkbox" class="form-checkbox" />
+            <input v-model="dataSkills" type="checkbox" class="form-checkbox" value="religion" />
             <span class="ml-2">Religion (INT)</span>
           </label>
         </div>
         <div>
           <label class="inline-flex items-center">
-            <input type="checkbox" class="form-checkbox" />
+            <input
+              v-model="dataSkills"
+              type="checkbox"
+              class="form-checkbox"
+              value="sleight of hand"
+            />
             <span class="ml-2">Sleight of Hand (DEX)</span>
           </label>
         </div>
         <div>
           <label class="inline-flex items-center">
-            <input type="checkbox" class="form-checkbox" />
+            <input v-model="dataSkills" type="checkbox" class="form-checkbox" value="stealth" />
             <span class="ml-2">Stealth (DEX)</span>
           </label>
         </div>
         <div>
           <label class="inline-flex items-center">
-            <input type="checkbox" class="form-checkbox" />
+            <input v-model="dataSkills" type="checkbox" class="form-checkbox" value="survival" />
             <span class="ml-2">Survival (WIS)</span>
           </label>
         </div>
@@ -335,7 +345,8 @@ export default {
         advCon: this.dataCon,
         advInt: this.dataInt,
         advWis: this.dataWis,
-        advCha: this.dataCha
+        advCha: this.dataCha,
+        advSkills: this.dataSkills
       })
       this.$router.push('/portfolio')
     },
@@ -353,7 +364,8 @@ export default {
         advCon: this.dataCon,
         advInt: this.dataInt,
         advWis: this.dataWis,
-        advCha: this.dataCha
+        advCha: this.dataCha,
+        advSkills: this.dataSkills
       })
       this.$router.push('/portfolio')
     },
@@ -370,6 +382,7 @@ export default {
       this.dataInt = this.character.advInt
       this.dataWis = this.character.advWis
       this.dataCha = this.character.advCha
+      this.dataSkills = this.character.advSkills
     },
     addStrPoint() {
       if (this.dataPoints !== 0) {
