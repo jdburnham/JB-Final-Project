@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import createPersistedState from 'vuex-persistedstate'
 
 Vue.use(Vuex)
 
@@ -28,5 +29,6 @@ export default new Vuex.Store({
     addCharacter: ({ commit }, newCharacter) =>
       commit('addingCharacter', newCharacter),
     removeCharacter: ({ commit }, id) => commit('removingCharacter', id)
-  }
+  },
+  plugins: [createPersistedState()]
 })
