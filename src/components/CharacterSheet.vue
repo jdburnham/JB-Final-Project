@@ -418,7 +418,6 @@
 </template>
 
 <script>
-import { db } from '../helpers/firebase'
 import short from 'short-uuid'
 export default {
   name: 'CharacterSheet',
