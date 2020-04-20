@@ -419,6 +419,8 @@
 
 <script>
 import short from 'short-uuid'
+import { db } from '../helpers/firebase'
+
 export default {
   name: 'CharacterSheet',
   props: {
@@ -434,7 +436,7 @@ export default {
         advGender: '',
         advRace: '',
         advClass: '',
-        advPoints: 21,
+        advPoints: 24,
         advStr: 8,
         advDex: 8,
         advCon: 8,
@@ -451,7 +453,7 @@ export default {
       dataGender: '',
       dataRace: '',
       dataClass: '',
-      dataPoints: 21,
+      dataPoints: 24,
       dataStr: 8,
       dataDex: 8,
       dataCon: 8,
@@ -461,13 +463,18 @@ export default {
       dataSkills: []
     }
   },
+  computed: {
+    user() {
+      return this.$store.getters.getUser
+    }
+  },
   created() {
     this.assignValues()
   },
   methods: {
-    add() {
-      this.$store.dispatch('addCharacter', {
-        id: short.generate(),
+    async add() {
+      const newCharacter = {
+        userId: this.user.uid,
         advName: this.dataName,
         advGender: this.dataGender,
         advRace: this.dataRace,
@@ -480,7 +487,12 @@ export default {
         advWis: this.dataWis,
         advCha: this.dataCha,
         advSkills: this.dataSkills
-      })
+      }
+      await db
+        .collection('characters')
+        .doc(short.generate())
+        .set(newCharacter)
+      this.$store.dispatch('addCharacter', newCharacter)
       this.$router.push('/portfolio')
     },
     save() {
@@ -503,19 +515,20 @@ export default {
       this.$router.push('/portfolio')
     },
     async assignValues() {
+      console.log(Object.keys(this.character))
       await this.$nextTick
-      this.dataName = this.character.advName
-      this.dataGender = this.character.advGender
-      this.dataRace = this.character.advRace
-      this.dataClass = this.character.advClass
-      this.dataPoints = this.character.advPoints
-      this.dataStr = this.character.advStr
-      this.dataDex = this.character.advDex
-      this.dataCon = this.character.advCon
-      this.dataInt = this.character.advInt
-      this.dataWis = this.character.advWis
-      this.dataCha = this.character.advCha
-      this.dataSkills = this.character.advSkills
+      this.dataName = this.character[0].advName
+      this.dataGender = this.character[0].advGender
+      this.dataRace = this.character[0].advRace
+      this.dataClass = this.character[0].advClass
+      this.dataPoints = this.character[0].advPoints
+      this.dataStr = this.character[0].advStr
+      this.dataDex = this.character[0].advDex
+      this.dataCon = this.character[0].advCon
+      this.dataInt = this.character[0].advInt
+      this.dataWis = this.character[0].advWis
+      this.dataCha = this.character[0].advCha
+      this.dataSkills = this.character[0].advSkills
     },
     addStrPoint() {
       if (this.dataPoints !== 0) {

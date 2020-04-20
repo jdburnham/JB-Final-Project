@@ -29,6 +29,7 @@
 </template>
 
 <script>
+import { db } from '../helpers/firebase'
 export default {
   name: 'Card',
   props: {
@@ -44,8 +45,11 @@ export default {
     }
   },
   methods: {
-    remove(id) {
-      this.$store.dispatch('removeCharacter', id)
+    async remove(id) {
+      await db
+        .collection('characters')
+        .doc(id)
+        .delete()
     },
     edit(id) {
       this.$router.push({ path: '/editCharacter', query: { id } })

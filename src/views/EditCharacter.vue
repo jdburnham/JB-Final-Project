@@ -3,7 +3,9 @@
 </template>
 
 <script>
+import { db } from '../helpers/firebase'
 import CharacterSheet from '@/components/CharacterSheet.vue'
+
 export default {
   name: 'EditCharacter',
   data() {
@@ -17,14 +19,17 @@ export default {
   methods: {
     goToHome() {
       this.$router.push('/portfolio')
+    },
+    async bind() {
+      await this.$bind(
+        'character',
+        db.collection('characters').doc(this.$route.query?.id)
+      )
     }
   },
   mounted() {
     if (this.$route.query?.id) {
-      const character = this.$store.getters.getCharacter(this.$route.query.id)
-      if (character) {
-        this.character = character
-      }
+      this.bind()
     } else {
       this.goToHome()
     }

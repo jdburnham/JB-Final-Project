@@ -21,16 +21,38 @@
 
 <script>
 import Card from '@/components/Card.vue'
+import { db } from '../helpers/firebase'
 export default {
   name: 'Portfolio',
   components: {
     Card
   },
+  mounted() {
+    this.bind()
+  },
+  data() {
+    return {
+      characters: []
+    }
+  },
   computed: {
-    characters() {
-      return this.$store.getters.getCharacters
+    user() {
+      return this.$store.getters.getUser
+    }
+  },
+  methods: {
+    async bind() {
+      await this.$bind(
+        'characters',
+        db.collection('characters').where('userId', '==', this.user.uid)
+      )
     }
   }
+  // computed: {
+  //   characters() {
+  //     return this.$store.getters.getCharacters
+  //   }
+  // }
 }
 </script>
 
