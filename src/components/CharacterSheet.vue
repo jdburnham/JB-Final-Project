@@ -201,7 +201,13 @@
     </table>
     <br />
     <div class="block">
-      <span class="text-gray-700">Select 3 Adventurer Skills</span>
+      <span class="text-gray-700 mr-4">Select 3 Adventurer Skills</span>
+      <button
+        class="bg-yellow-600 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded"
+        @click="dataSkills = []"
+      >
+        Clear Skills
+      </button>
       <div class="mt-2">
         <div>
           <label class="inline-flex items-center">
@@ -210,6 +216,7 @@
               type="checkbox"
               class="form-checkbox"
               value="acrobatics"
+              :disabled="!allowNewSkill"
             />
             <span class="ml-2">Acrobatics (DEX)</span>
           </label>
@@ -221,6 +228,7 @@
               type="checkbox"
               class="form-checkbox"
               value="animal handling"
+              :disabled="!allowNewSkill"
             />
             <span class="ml-2">Animal Handling (WIS)</span>
           </label>
@@ -232,6 +240,7 @@
               type="checkbox"
               class="form-checkbox"
               value="arcana"
+              :disabled="!allowNewSkill"
             />
             <span class="ml-2">Arcana (INT)</span>
           </label>
@@ -243,6 +252,7 @@
               type="checkbox"
               class="form-checkbox"
               value="athletics"
+              :disabled="!allowNewSkill"
             />
             <span class="ml-2">Athletics (STR)</span>
           </label>
@@ -254,6 +264,7 @@
               type="checkbox"
               class="form-checkbox"
               value="deception"
+              :disabled="!allowNewSkill"
             />
             <span class="ml-2">Deception (CHA)</span>
           </label>
@@ -265,6 +276,7 @@
               type="checkbox"
               class="form-checkbox"
               value="history"
+              :disabled="!allowNewSkill"
             />
             <span class="ml-2">History (INT)</span>
           </label>
@@ -276,6 +288,7 @@
               type="checkbox"
               class="form-checkbox"
               value="insight"
+              :disabled="!allowNewSkill"
             />
             <span class="ml-2">Insight (WIS)</span>
           </label>
@@ -287,6 +300,7 @@
               type="checkbox"
               class="form-checkbox"
               value="intimidation"
+              :disabled="!allowNewSkill"
             />
             <span class="ml-2">Intimidation (CHA)</span>
           </label>
@@ -298,6 +312,7 @@
               type="checkbox"
               class="form-checkbox"
               value="medicine"
+              :disabled="!allowNewSkill"
             />
             <span class="ml-2">Medicine (WIS)</span>
           </label>
@@ -309,6 +324,7 @@
               type="checkbox"
               class="form-checkbox"
               value="nature"
+              :disabled="!allowNewSkill"
             />
             <span class="ml-2">Nature (INT)</span>
           </label>
@@ -320,6 +336,7 @@
               type="checkbox"
               class="form-checkbox"
               value="perception"
+              :disabled="!allowNewSkill"
             />
             <span class="ml-2">Perception (WIS)</span>
           </label>
@@ -331,6 +348,7 @@
               type="checkbox"
               class="form-checkbox"
               value="performance"
+              :disabled="!allowNewSkill"
             />
             <span class="ml-2">Performance (CHA)</span>
           </label>
@@ -342,6 +360,7 @@
               type="checkbox"
               class="form-checkbox"
               value="persuassion"
+              :disabled="!allowNewSkill"
             />
             <span class="ml-2">Persuassion (CHA)</span>
           </label>
@@ -353,6 +372,7 @@
               type="checkbox"
               class="form-checkbox"
               value="religion"
+              :disabled="!allowNewSkill"
             />
             <span class="ml-2">Religion (INT)</span>
           </label>
@@ -364,6 +384,7 @@
               type="checkbox"
               class="form-checkbox"
               value="sleight of hand"
+              :disabled="!allowNewSkill"
             />
             <span class="ml-2">Sleight of Hand (DEX)</span>
           </label>
@@ -375,6 +396,7 @@
               type="checkbox"
               class="form-checkbox"
               value="stealth"
+              :disabled="!allowNewSkill"
             />
             <span class="ml-2">Stealth (DEX)</span>
           </label>
@@ -386,6 +408,7 @@
               type="checkbox"
               class="form-checkbox"
               value="survival"
+              :disabled="!allowNewSkill"
             />
             <span class="ml-2">Survival (WIS)</span>
           </label>
@@ -460,7 +483,8 @@ export default {
       dataInt: 8,
       dataWis: 8,
       dataCha: 8,
-      dataSkills: []
+      dataSkills: [],
+      allowNewSkill: true
     }
   },
   computed: {
@@ -470,6 +494,16 @@ export default {
   },
   created() {
     this.assignValues()
+  },
+  watch: {
+    character: async function() {
+      await this.assignValues()
+    },
+    dataSkills: function() {
+      this.dataSkills.length < 3
+        ? (this.allowNewSkill = true)
+        : (this.allowNewSkill = false)
+    }
   },
   methods: {
     async add() {
@@ -495,10 +529,10 @@ export default {
       this.$store.dispatch('addCharacter', newCharacter)
       this.$router.push('/portfolio')
     },
-    save() {
+    async save() {
       this.$store.dispatch('removeCharacter', this.character.id)
-      this.$store.dispatch('addCharacter', {
-        id: this.character.id,
+      const savedCharacter = {
+        userId: this.user.uid,
         advName: this.dataName,
         advGender: this.dataGender,
         advRace: this.dataRace,
@@ -511,24 +545,28 @@ export default {
         advWis: this.dataWis,
         advCha: this.dataCha,
         advSkills: this.dataSkills
-      })
+      }
+      await db
+        .collection('characters')
+        .doc(this.character.id)
+        .set(savedCharacter)
+      this.$store.dispatch('addCharacter', savedCharacter)
       this.$router.push('/portfolio')
     },
     async assignValues() {
-      console.log(Object.keys(this.character))
       await this.$nextTick
-      this.dataName = this.character[0].advName
-      this.dataGender = this.character[0].advGender
-      this.dataRace = this.character[0].advRace
-      this.dataClass = this.character[0].advClass
-      this.dataPoints = this.character[0].advPoints
-      this.dataStr = this.character[0].advStr
-      this.dataDex = this.character[0].advDex
-      this.dataCon = this.character[0].advCon
-      this.dataInt = this.character[0].advInt
-      this.dataWis = this.character[0].advWis
-      this.dataCha = this.character[0].advCha
-      this.dataSkills = this.character[0].advSkills
+      this.dataName = this.character.advName
+      this.dataGender = this.character.advGender
+      this.dataRace = this.character.advRace
+      this.dataClass = this.character.advClass
+      this.dataPoints = this.character.advPoints
+      this.dataStr = this.character.advStr
+      this.dataDex = this.character.advDex
+      this.dataCon = this.character.advCon
+      this.dataInt = this.character.advInt
+      this.dataWis = this.character.advWis
+      this.dataCha = this.character.advCha
+      this.dataSkills = this.character.advSkills
     },
     addStrPoint() {
       if (this.dataPoints !== 0) {
