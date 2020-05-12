@@ -8,10 +8,10 @@
       class="absolute h-screen w-screen top-0 flex flex-col justify-center items-center"
     >
       <h1 class="text-6xl font-bold text-gray-400 opacity-75">
-        Welcome to the Table Top RPG Charactor Creator
+        Welcome to the Table Top RPG Character Creator
       </h1>
       <h3 class="text-4xl font-bold text-gray-400 opacity-75">
-        Login to begin creating a charactor!
+        Login to begin creating a character!
       </h3>
       <p class="text-2xl font-bold text-gray-400 opacity-75">
         By: Josh Burnham

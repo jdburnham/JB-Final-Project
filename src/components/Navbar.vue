@@ -6,7 +6,7 @@
         to="/"
       >
         <img class="h-8 mr-4" src="sword.png" alt="Logo" />
-        Table Top RPG Charactor Creator
+        Table Top RPG Character Creator
       </router-link>
     </div>
     <div>
